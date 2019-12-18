@@ -93,4 +93,22 @@ describe('app routes', () => {
       });
   });
 
+  it('updates a nirvana show', () => {
+    return request(app)
+      .patch(`/api/v1/nirvanas/${nirvana.id}`)
+      .send({ recorded: 'false' })
+      .then(res => {
+        expect(res.body).toEqual({
+          _id: nirvana.id,
+          date: date.toISOString(),
+          venue: 'City Gardens',
+          city: 'Trenton',
+          state: 'New Jersey',
+          country: 'United States',
+          recorded: 'false',
+          __v: 0
+        });
+      });
+  });
+
 });
