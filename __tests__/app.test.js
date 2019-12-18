@@ -59,4 +59,38 @@ describe('app routes', () => {
       });
   });
 
+  it('gets a nirvana show by Id', () => {
+    return request(app)
+      .get(`/api/v1/nirvanas/${nirvana.id}`)
+      .then(res => {
+        expect(res.body).toEqual({
+          _id: nirvana.id,
+          date: date.toISOString(),
+          venue: 'City Gardens',
+          city: 'Trenton',
+          state: 'New Jersey',
+          country: 'United States',
+          recorded: 'true',
+          __v: 0
+        });
+      });
+  });
+
+  it('gets all nirvana shows', () => {
+    return request(app)
+      .get('/api/v1/nirvanas')
+      .then(res => {
+        expect(res.body).toEqual([{
+          _id: nirvana.id,
+          date: date.toISOString(),
+          venue: 'City Gardens',
+          city: 'Trenton',
+          state: 'New Jersey',
+          country: 'United States',
+          recorded: 'true',
+          __v: 0
+        }]);
+      });
+  });
+
 });
